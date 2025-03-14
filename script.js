@@ -16,3 +16,6 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(book);
   return book;
 }
+
+addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, false);
+addBookToLibrary('Head First Design Patterns', 'Eric Freeman & Elisabeth Robson', 672, true);
