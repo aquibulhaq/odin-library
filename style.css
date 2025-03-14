@@ -1,3 +1,18 @@
 h1 {
   text-decoration: underline;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid black;
+  padding: 0.5em;
+  text-align: left;
+}
+
+td:nth-child(3) {
+  text-align: right;
+}
