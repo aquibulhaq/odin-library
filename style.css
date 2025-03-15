@@ -16,3 +16,29 @@ th {
 td:nth-child(3) {
   text-align: right;
 }
+
+.fields {
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 0.5em;
+  column-gap: 0.25em;
+
+  margin: 1em 0;
+}
+
+.fields>input {
+  justify-self: left;
+}
+
+.fields>input[type='checkbox'] {
+  margin-left: 0;
+}
+
+.fields>label {
+  display: flex;
+  justify-content: space-between;
+
+  &::after {
+    content: ':';
+  }
+}
