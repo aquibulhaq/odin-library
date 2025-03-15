@@ -55,6 +55,15 @@ function displayBookinTable(book) {
   removeBtn.classList.add('remove');
   removeBtn.innerText = 'Remove Book';
 
+  const id = book.id;
+  removeBtn.addEventListener('click', () => {
+    tbody.removeChild(tr);
+
+    const idx = myLibrary.findIndex(elem => elem.id === id);
+    if (idx >= 0)
+      myLibrary.splice(idx, 1);
+  });
+
   removeTd.appendChild(removeBtn);
   tr.appendChild(removeTd);
 
