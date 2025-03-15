@@ -1,8 +1,17 @@
 const myLibrary = [];
 const tbody = document.querySelector('tbody');
+
 const newBookBtn = document.querySelector('.new-book');
+
 const dialog = document.querySelector('dialog');
+
+const titleField = document.querySelector('#title');
+const authorField = document.querySelector('#author');
+const pagesField = document.querySelector('#pages');
+const readField = document.querySelector('#read');
+
 const cancelBtn = document.querySelector('.cancel');
+const submitBtn = document.querySelector('.submit');
 
 function Book(title, author, pages, read) {
   if (!new.target)
@@ -54,5 +63,26 @@ newBookBtn.addEventListener('click', () => {
 
 cancelBtn.addEventListener('click', (e) => {
   e.preventDefault();
+  dialog.close();
+});
+
+submitBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const title = titleField.value;
+  const author = authorField.value;
+  const pages = Number(pagesField.value);
+
+  if (!title || !author || pages < 0 || !Number.isInteger(pages)) {
+    console.log(`Got invalid values: title="${title}", author="${author}", pages=${pages}`);
+    dialog.close();
+    return;
+  }
+
+  const read = readField.checked;
+
+  const book = addBookToLibrary(title, author, pages, read);
+  displayBookinTable(book);
+
   dialog.close();
 });
