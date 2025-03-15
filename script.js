@@ -50,7 +50,15 @@ function displayBookinTable(book) {
   tr.appendChild(pagesTd);
 
   const readTd = document.createElement('td');
-  readTd.textContent = book['read'] ? 'Yes' : 'No';
+
+  const readChk = document.createElement('input');
+  readChk.type = 'checkbox';
+  readChk.checked = book['read'];
+  readChk.addEventListener('click', () => {
+    book.toggleRead();
+  });
+
+  readTd.appendChild(readChk);
   tr.appendChild(readTd);
 
   const removeTd = document.createElement('td');
