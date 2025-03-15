@@ -1,5 +1,7 @@
 const myLibrary = [];
 const tbody = document.querySelector('tbody');
+const newBookBtn = document.querySelector('.new-book');
+const dialog = document.querySelector('dialog');
 
 function Book(title, author, pages, read) {
   if (!new.target)
@@ -44,3 +46,7 @@ addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, false);
 addBookToLibrary('Head First Design Patterns', 'Eric Freeman & Elisabeth Robson', 672, true);
 
 myLibrary.forEach(displayBookinTable);
+
+newBookBtn.addEventListener('click', () => {
+  dialog.showModal();
+});
