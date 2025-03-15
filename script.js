@@ -2,6 +2,7 @@ const myLibrary = [];
 const tbody = document.querySelector('tbody');
 const newBookBtn = document.querySelector('.new-book');
 const dialog = document.querySelector('dialog');
+const cancelBtn = document.querySelector('.cancel');
 
 function Book(title, author, pages, read) {
   if (!new.target)
@@ -49,4 +50,9 @@ myLibrary.forEach(displayBookinTable);
 
 newBookBtn.addEventListener('click', () => {
   dialog.showModal();
+});
+
+cancelBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  dialog.close();
 });
