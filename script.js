@@ -49,6 +49,15 @@ function displayBookinTable(book) {
   readTd.textContent = book['read'] ? 'Yes' : 'No';
   tr.appendChild(readTd);
 
+  const removeTd = document.createElement('td');
+
+  const removeBtn = document.createElement('button');
+  removeBtn.classList.add('remove');
+  removeBtn.innerText = 'Remove Book';
+
+  removeTd.appendChild(removeBtn);
+  tr.appendChild(removeTd);
+
   tbody.appendChild(tr);
 }
 
