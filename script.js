@@ -15,20 +15,19 @@ const readField = document.querySelector('#read');
 const cancelBtn = document.querySelector('.cancel');
 const submitBtn = document.querySelector('.submit');
 
-function Book(title, author, pages, read) {
-  if (!new.target)
-    throw Error("You must use the 'new' operator to call the constructor");
+class Book {
+  constructor(title, author, pages, read) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+  toggleRead() {
+    return this.read = !this.read;
+  }
 }
-
-Book.prototype.toggleRead = function () {
-  return this.read = !this.read;
-};
 
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
