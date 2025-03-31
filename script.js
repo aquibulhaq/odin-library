@@ -1,3 +1,5 @@
+'use strict';
+
 const myLibrary = [];
 const tbody = document.querySelector('tbody');
 
