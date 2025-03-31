@@ -1,6 +1,5 @@
 'use strict';
 
-const myLibrary = [];
 const tbody = document.querySelector('tbody');
 
 const newBookBtn = document.querySelector('.new-book');
@@ -29,11 +28,25 @@ class Book {
   }
 }
 
-function addBookToLibrary(title, author, pages, read) {
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-  return book;
-}
+const library = (function Library() {
+  const books = [];
+
+  const addBook = (book) => books.push(book);
+
+  const removeBookById = (id) => {
+    const index = books.findIndex((book) => book.id === id);
+    if (index >= 0)
+      books.splice(index, 1);
+  };
+
+  return {
+    get books() {
+      return books;
+    },
+    addBook,
+    removeBookById,
+  };
+})();
 
 function displayBookinTable(book) {
   const tr = document.createElement('tr');
@@ -72,9 +85,7 @@ function displayBookinTable(book) {
   removeBtn.addEventListener('click', () => {
     tbody.removeChild(tr);
 
-    const idx = myLibrary.findIndex(elem => elem.id === id);
-    if (idx >= 0)
-      myLibrary.splice(idx, 1);
+    library.removeBookById(id);
   });
 
   removeTd.appendChild(removeBtn);
@@ -83,10 +94,10 @@ function displayBookinTable(book) {
   tbody.appendChild(tr);
 }
 
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, false);
-addBookToLibrary('Head First Design Patterns', 'Eric Freeman & Elisabeth Robson', 672, true);
+library.addBook(new Book('The Hobbit', 'J.R.R. Tolkien', 295, false));
+library.addBook(new Book('Head First Design Patterns', 'Eric Freeman & Elisabeth Robson', 672, true));
 
-myLibrary.forEach(displayBookinTable);
+library.books.forEach(displayBookinTable);
 
 newBookBtn.addEventListener('click', () => {
   dialog.showModal();
@@ -112,7 +123,8 @@ submitBtn.addEventListener('click', (e) => {
 
   const read = readField.checked;
 
-  const book = addBookToLibrary(title, author, pages, read);
+  const book = new Book(title, author, pages, read);
+  library.addBook(book);
   displayBookinTable(book);
 
   dialog.close();
